@@ -18,15 +18,14 @@ export class AppComponent {
   openDialog() {
     this.dialog.open(DialogComponent, {
       width: '40%',
-      height: '40%'
-      //will parse in the data
+      //height: '40%'
     });
   }
 
   openShare(){
     this.dialog.open(ShareComponent, {
       width: '40%',
-      height: '40%'
+      //height: '40%'
     })
   }
 

@@ -1,25 +1,56 @@
-<h2 mat-dialog-title> Listing Form </h2>
+<h2 class="form" mat-dialog-title> Listing Form </h2>
 
 <div mat-dialog-content>
-  <mat-form-field appearance="outline">
-    <mat-label> Item Name </mat-label>
-    <input matInput placeholder="your list">
-  </mat-form-field>
+  <form [formGroup]="listingForm" action="">
+    <mat-form-field appearance="outline">
+      <mat-label> Item Name </mat-label>
+      <input formControlName="listName" matInput placeholder="your list">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label> Item Category </mat-label>
+      <mat-select formControlName="category" placeholder="item category">
+        <mat-option value="food"> Food </mat-option>
+        <mat-option value="clothing"> Clothing </mat-option>
+        <mat-option value="gadgets"> Gadgets </mat-option>
+        <mat-option value="furniture"> Furniture </mat-option>
+        <mat-option value="travel"> Travel </mat-option>
+        <mat-option value="housing"> Housing </mat-option>
+        <mat-option value="education"> Education </mat-option>
+        <mat-option value="healthcare"> Healthcare </mat-option>
+        <mat-option value="miscellaneous"> Miscellaneous </mat-option>
+        <mat-option value="luxury"> Luxury </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label> Deadline </mat-label>
+      <input formControlName="deadline" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+    <label for=""> <h3> Urgency </h3></label>
+    <mat-radio-group formControlName="priority" class="example-radio-group">
+      <mat-radio-button class="example-radio-button" *ngFor="let urgent of  Urgency" [value]="urgent">
+        {{urgent}}
+      </mat-radio-button>
+    </mat-radio-group>
+  
+    <mat-form-field appearance="outline">
+      <mat-label> Amount Needed (naira) </mat-label>
+      <input formControlName="amount" matInput type="text" placeholder="your amount in naira">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label> Statement </mat-label>
+      <textarea formControlName="statement" matInput aria-label="text" name="text" id="text" cols="30" rows="10"></textarea>
+    </mat-form-field>
+  </form>
+</div>
 
-  <mat-form-field appearance="outline">
-    <mat-label> Item Category </mat-label>
-    <mat-select placeholder="item category">
-      <mat-option value="food"> Food </mat-option>
-      <mat-option value="clothing"> Clothing </mat-option>
-      <mat-option value="gadgets"> Gadgets </mat-option>
-      <mat-option value="furniture"> Furniture </mat-option>
-      <mat-option value="travel"> Travel </mat-option>
-      <mat-option value="housing"> Housing </mat-option>
-      <mat-option value="education"> Education </mat-option>
-      <mat-option value="healthcare"> Healthcare </mat-option>
-      <mat-option value="miscellaneous"> Miscellaneous </mat-option>
-      <mat-option value="luxury"> Luxury </mat-option>
-
-    </mat-select>
-  </mat-form-field>
+<div>
+  <div mat-dialog-actions [align]="'end'">
+    <button type="reset" mat-raised-button color="warn" mat-dialog-close> Close </button>
+    <button type="submit" mat-raised-button color="primary" (click)="addListing()"> Save </button>
 </div>
